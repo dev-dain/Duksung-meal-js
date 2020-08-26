@@ -8,10 +8,11 @@ fs.readFile('./meal.json', 'utf8', (err, data) => {
   meal = JSON.parse(data);
 });
 
-function getTemplate(simpleText, replyCount=0, reply='') {
+//simpleText:String, reply:Array
+function getTemplate(simpleText, reply='') {
   const quickReplies = [];
   
-  if (replyCount !== 0) {
+  if (reply) {
     reply.forEach(value => {
       quickReplies.push({
         'label': value,
@@ -76,7 +77,7 @@ app.post('/message', (req, res) => {
     }
 
   } else if (question === selectDay || question === goBack) {
-    data = getTemplate('요일을 선택하세요.', 5, ['월', '화', '수', '목', '금']);
+    data = getTemplate('요일을 선택하세요.', ['월', '화', '수', '목', '금']);
 
   } else if (question === '상시메뉴') {
     data = getTemplate(`${meal[0].meal}`);
@@ -85,7 +86,7 @@ app.post('/message', (req, res) => {
             question === '목' || question === '금') {
     const dayObj = { '월': 1, '화': 2, '수': 3, '목': 4, '금': 5};
     data = getTemplate(`${meal[dayObj[question]].day} ${meal[dayObj[question]].student} ${meal[dayObj[question]].staff}`,
-                        replyCount = 2, reply = [goBack, goMain]);
+                        [goBack, goMain]);
 
   } else {
     data = getTemplate('개발 중이거나 오류입니다.\n' +
