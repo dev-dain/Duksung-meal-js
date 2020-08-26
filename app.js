@@ -23,7 +23,7 @@ app.post('/message', (req, res) => {
 
   const question = req.body.userRequest.utterance;
   const goMain = '처음으로';
-  const goBack = '뒤로 가기';
+  const goBack = '뒤로가기';
   const selectDay = '요일지정';
   let data;
 
@@ -95,7 +95,7 @@ app.post('/message', (req, res) => {
         }
       }
     }
-  } else if (question === selectDay) {
+  } else if (question === selectDay || question === goBack) {
     data = {
       'version': '2.0',
       'template': {
@@ -145,20 +145,24 @@ app.post('/message', (req, res) => {
     }
   } else if (question === '월' || question === '화' || question === '수' ||
             question === '목' || question === '금') {
-    const dayObj = { '월': 1, '화': 2, '수': 3, '목': 4, '금': 5};
+    const dayObj = { '월': 1, '화': 2, '수': 3, '목': 4, '금': 5 };
     data = {
       'version': '2.0',
       'template': {
         'outputs': [{
           'simpleText': {
-            'text': `${meal[dayObj.question].day} ${meal[dayObj.question].student} ${meal[dayObj.question].staff}`
+            'text': `${meal[dayObj[question]].day} ${meal[dayObj[question]].student} ${meal[dayObj[question]].staff}`
           }
         }],
         'quickReplies': [{
           'label': goBack,
           'action': 'message',
           'messageText': goBack
-        }]
+        }, {
+	  'label': goMain,
+	  'action': 'message',
+	  'messageText': goMain
+	}]
       }
     }
   } else {
