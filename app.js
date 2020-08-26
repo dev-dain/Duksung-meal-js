@@ -95,7 +95,7 @@ app.post('/message', (req, res) => {
         }
       }
     }
-  } else if (question === '요일지정') {
+  } else if (question === selectDay) {
     data = {
       'version': '2.0',
       'template': {
