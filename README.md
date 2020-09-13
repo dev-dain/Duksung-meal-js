@@ -15,7 +15,7 @@
 - npm 6.14.7 
 - express 4.17.1
 - cheerio 1.0.0
-- puppeteer 5.2.1
+- puppeteer 5.3.0
 ---
 ## 사용 방법
 ```
