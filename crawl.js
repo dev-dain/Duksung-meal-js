@@ -40,7 +40,7 @@ const mealObj = [];
       if (err) throw err;
       console.log('OK');
     });
-
+    console.log(new Date());
     await browser.close();
   } catch (err) {
     console.error(err); 

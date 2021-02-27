@@ -19,6 +19,7 @@ fs.readFile('./meal.json', 'utf8', (err, data) => {
 
   fs.writeFile('./meal.json', JSON.stringify(mealObj), (err) => {
     if (err) throw err;
+    console.log(new Date());
     console.log('OK');
   });
 });
